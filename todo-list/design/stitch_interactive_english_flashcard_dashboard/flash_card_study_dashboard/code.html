@@ -1,0 +1,345 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
+<title>Flash Card Learning - Study</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Inter:wght@400;500&amp;family=Space+Grotesk:wght@600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Plus+Jakarta+Sans:wght@100..900&amp;family=Space+Grotesk:wght@100..900&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* 3D Flip Card Styles */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .preserve-3d {
+            transform-style: preserve-3d;
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+        .flipped {
+            transform: rotateY(180deg);
+        }
+
+        /* Pixel-Art Shine Effect */
+        .progress-shine {
+            position: relative;
+            overflow: hidden;
+        }
+        .progress-shine::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 999px;
+        }
+
+        /* Sticker Shadows */
+        .sticker-shadow {
+            box-shadow: 0 8px 0 0 rgba(0, 0, 0, 0.1);
+        }
+        .sticker-shadow:active {
+            box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1);
+            transform: translateY(4px);
+        }
+        
+        /* Smooth category badge */
+        .category-badge-noun {
+            background-color: rgba(132, 80, 0, 0.1);
+            color: #845000;
+            border: 1px solid rgba(132, 80, 0, 0.2);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error-container": "#ffdad6",
+                        "surface": "#f7fafc",
+                        "primary": "#005da7",
+                        "surface-container-low": "#f1f4f6",
+                        "on-error": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-secondary-container": "#00723f",
+                        "outline": "#717783",
+                        "on-primary-fixed-variant": "#004883",
+                        "inverse-surface": "#2d3133",
+                        "on-background": "#181c1e",
+                        "primary-fixed": "#d4e3ff",
+                        "on-secondary-fixed": "#00210f",
+                        "primary-fixed-dim": "#a4c9ff",
+                        "inverse-primary": "#a4c9ff",
+                        "on-tertiary-fixed-variant": "#673d00",
+                        "surface-container-high": "#e5e9eb",
+                        "on-surface-variant": "#414751",
+                        "on-surface": "#181c1e",
+                        "on-tertiary-fixed": "#2b1700",
+                        "secondary-container": "#85f6ad",
+                        "on-primary-container": "#fdfcff",
+                        "surface-bright": "#f7fafc",
+                        "tertiary": "#845000",
+                        "outline-variant": "#c1c7d3",
+                        "on-tertiary-container": "#fffbff",
+                        "surface-variant": "#e0e3e5",
+                        "surface-container": "#ebeef0",
+                        "secondary-fixed-dim": "#6bdc96",
+                        "tertiary-container": "#a36712",
+                        "tertiary-fixed-dim": "#ffb866",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#006d3c",
+                        "surface-tint": "#0060ac",
+                        "on-primary-fixed": "#001c39",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#ffddba",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#eef1f3",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#88f9b0",
+                        "on-secondary-fixed-variant": "#00522c",
+                        "surface-dim": "#d7dadc",
+                        "primary-container": "#2976c7",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#f7fafc"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-padding": "32px",
+                        "base": "8px",
+                        "card-gap": "16px",
+                        "inner-padding": "20px",
+                        "container-margin": "24px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Space Grotesk"],
+                        "card-text": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-xl": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "card-text": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "body-md": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-container-margin py-4 max-w-full bg-surface border-b-2 border-outline-variant shadow-sm">
+<div class="flex items-center gap-4"><button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high p-2 rounded-full transition-colors mr-2">arrow_back</button>
+<span class="material-symbols-outlined text-primary text-3xl">style</span>
+<h1 class="text-label-md font-label-md font-black tracking-widest text-primary">FLASH CARD LEARNING</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex items-center gap-6 mr-8">
+<a class="text-primary font-bold border-b-2 border-primary py-1" href="#">Study</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high transition-colors px-3 py-1 rounded-lg" href="#">Stats</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high transition-colors px-3 py-1 rounded-lg" href="#">Categories</a>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high p-2 rounded-full transition-colors">logout</button>
+<div class="w-10 h-10 rounded-full border-2 border-primary-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional and friendly studio portrait of a young adult learner smiling, set against a vibrant, soft-focus background of library shelves. The lighting is warm and cinematic, highlighting clear facial details. The overall aesthetic is clean, academic yet modern, matching the primary blue and soft gray color palette of a high-end educational app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCUelfhisBH-Wxsen3RP-Xp_dLk60M1DHdJD-xpEPB1CGDZXGHYjZ9rVJc_l2GwDB6lw-t-jYLJpCWQpFf4UafnOM7ETTpfEEu5A6FiZn6uWwCSVVBgs0LFazS8Fkt8phc4CsLI-4NOJ7fJD2gj12moESD0W_OKxkKrnmuM8rFlkz4lOtaRwVyJknb_MPd8j6AWx63mJ18B9rPTxb6RkjslongJghSp3ubSt4oYZRUsdO34DPb2zrp2JNDbICtMalK5zBkULlQZAUZ">
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col fixed left-0 top-0 h-full z-40 h-screen w-64 rounded-r-xl bg-surface-container-low shadow-sm pt-24 pb-8">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary text-headline-lg font-headline-lg">auto_stories</span>
+<h2 class="text-headline-lg font-headline-lg text-primary">Study</h2>
+</div>
+<p class="text-on-surface-variant text-label-md font-label-md">Level: Intermediate</p>
+</div>
+<nav class="flex-1 space-y-2 px-4">
+<a class="flex items-center gap-4 px-4 py-3 text-primary font-bold border-r-4 border-primary bg-primary-container/20 transition-transform translate-x-1" href="#">
+<span class="material-symbols-outlined">library_books</span>
+<span class="text-label-md font-label-md">All Words</span>
+</a>
+
+
+
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-highest transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">grade</span>
+<span class="text-label-md font-label-md">Favorites</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-highest transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">mic</span>
+<span class="text-label-md font-label-md">Speak Test</span>
+</a></nav>
+<div class="px-4 mt-auto">
+<button class="w-full bg-primary text-on-primary font-bold py-4 rounded-xl shadow-lg hover:scale-95 transition-transform duration-150 sticker-shadow">
+                Start Daily Quiz
+            </button>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="lg:ml-64 pt-24 pb-32 px-container-margin min-h-screen flex flex-col items-center">
+<!-- Dashboard Summary Row -->
+<div class="w-full max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-card-gap mb-12">
+<div class="bg-surface-container-lowest p-inner-padding rounded-xl border-2 border-outline-variant/30 flex items-center gap-4 sticker-shadow">
+<div class="w-12 h-12 rounded-lg bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<p class="text-on-surface-variant text-label-md font-label-md">Mastered Today</p>
+<p class="text-headline-lg font-headline-lg text-secondary">12</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-inner-padding rounded-xl border-2 border-outline-variant/30 flex items-center gap-4 sticker-shadow">
+<div class="w-12 h-12 rounded-lg bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<div>
+<p class="text-on-surface-variant text-label-md font-label-md">Current Streak</p>
+<p class="text-headline-lg font-headline-lg text-tertiary">5 Days</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-inner-padding rounded-xl border-2 border-outline-variant/30 flex items-center gap-4 sticker-shadow">
+<div class="w-12 h-12 rounded-lg bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">track_changes</span>
+</div>
+<div>
+<p class="text-on-surface-variant text-label-md font-label-md">Accuracy</p>
+<p class="text-headline-lg font-headline-lg text-primary">85%</p>
+</div>
+</div>
+</div>
+<!-- Progress Bar -->
+<div class="w-full max-w-2xl mb-8">
+<div class="flex justify-between mb-2">
+<span class="text-label-md font-label-md text-on-surface-variant">Session Progress</span>
+<span class="text-label-md font-label-md text-primary">15/20 Words</span>
+</div>
+<div class="h-4 w-full bg-surface-container-highest rounded-full progress-shine overflow-hidden">
+<div class="h-full bg-primary w-3/4 rounded-full transition-all duration-500"></div>
+</div>
+</div>
+<!-- Flash Card Container -->
+<div class="perspective-1000 w-full max-w-md h-[400px] mb-12">
+<div class="relative w-full h-full transition-transform duration-700 preserve-3d cursor-pointer" id="flashcard" onclick="this.classList.toggle('flipped')">
+<!-- Front Face -->
+<div class="absolute inset-0 w-full h-full backface-hidden bg-white rounded-[24px] border-4 border-[#845000]/20 flex flex-col items-center justify-center p-8 shadow-xl">
+<span class="category-badge-noun px-4 py-1 rounded-full text-label-md font-label-md mb-6">Noun</span>
+<h2 class="text-headline-xl font-headline-xl text-on-surface mb-2">Adventure</h2>
+<p class="text-on-surface-variant text-body-md font-body-md mb-8">Tap to flip</p>
+<span class="material-symbols-outlined text-primary-fixed-dim text-5xl">quiz</span>
+</div>
+<!-- Back Face -->
+<div class="absolute inset-0 w-full h-full backface-hidden rotate-y-180 bg-surface-container-lowest rounded-[24px] border-4 border-secondary/20 flex flex-col items-center justify-center p-8 shadow-xl">
+<h3 class="text-headline-lg font-headline-lg text-secondary mb-4">การผจญภัย</h3>
+<div class="w-full bg-surface-container p-4 rounded-xl border-l-4 border-primary italic text-center">
+<p class="text-body-md font-body-md">"Life is a great <span class="font-bold text-primary">adventure</span>."</p>
+</div>
+<div class="mt-8 flex gap-2">
+<span class="material-symbols-outlined text-on-surface-variant">volume_up</span>
+<span class="material-symbols-outlined text-on-surface-variant">bookmark</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors" title="Speak Test">mic</span></div>
+</div>
+</div>
+</div><div class="flex items-center gap-4 mb-8">
+    <button class="flex items-center gap-2 bg-surface-container-highest text-on-surface px-6 py-3 rounded-xl font-bold hover:bg-surface-container-high transition-all sticker-shadow">
+        <span class="material-symbols-outlined">navigate_next</span>
+        <span class="">Next Word</span>
+    </button>
+    <button class="material-symbols-outlined p-3 rounded-xl border-2 border-outline-variant/30 text-on-surface-variant hover:text-tertiary hover:bg-tertiary-fixed transition-all sticker-shadow" id="favorite-btn" onclick="this.classList.toggle('text-tertiary'); this.style.fontVariationSettings = this.classList.contains('text-tertiary') ? '\'FILL\' 1' : '\'FILL\' 0'">
+        grade
+    </button>
+</div>
+<!-- Action Buttons -->
+<div class="w-full max-w-2xl grid grid-cols-2 sm:grid-cols-4 gap-4">
+<button class="group flex flex-col items-center bg-white p-4 rounded-xl border-2 border-error hover:bg-error-container transition-all sticker-shadow">
+<span class="text-error font-bold text-lg mb-1">Again</span>
+<span class="text-on-surface-variant text-xs font-label-md">1 min</span>
+</button>
+<button class="group flex flex-col items-center bg-white p-4 rounded-xl border-2 border-tertiary-container hover:bg-tertiary-fixed transition-all sticker-shadow">
+<span class="text-tertiary-container font-bold text-lg mb-1">Hard</span>
+<span class="text-on-surface-variant text-xs font-label-md">2 days</span>
+</button>
+<button class="group flex flex-col items-center bg-white p-4 rounded-xl border-2 border-secondary hover:bg-secondary-container transition-all sticker-shadow">
+<span class="text-secondary font-bold text-lg mb-1">Good</span>
+<span class="text-on-surface-variant text-xs font-label-md">4 days</span>
+</button>
+<button class="group flex flex-col items-center bg-white p-4 rounded-xl border-2 border-primary hover:bg-primary-fixed transition-all sticker-shadow">
+<span class="text-primary font-bold text-lg mb-1">Easy</span>
+<span class="text-on-surface-variant text-xs font-label-md">7 days</span>
+</button>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-surface shadow-[0_-4px_8px_rgba(0,0,0,0.15)] rounded-t-xl">
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">style</span>
+<span class="text-label-md-mobile font-label-md-mobile">Study</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors p-2">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="text-label-md-mobile font-label-md-mobile">Stats</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors p-2">
+<span class="material-symbols-outlined">category</span>
+<span class="text-label-md-mobile font-label-md-mobile">Categories</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors p-2">
+<span class="material-symbols-outlined">person</span>
+<span class="text-label-md-mobile font-label-md-mobile">Profile</span>
+</button>
+</nav>
+<script>
+        // Micro-interaction for buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mousedown', () => {
+                btn.style.transform = 'scale(0.95)';
+            });
+            btn.addEventListener('mouseup', () => {
+                btn.style.transform = '';
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = '';
+            });
+        });
+
+        // Spacebar to flip card
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                document.getElementById('flashcard').classList.toggle('flipped');
+            }
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+</body></html>

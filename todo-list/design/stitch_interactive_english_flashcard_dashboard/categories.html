@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Flash Card Learning — Browse and study word categories. Track mastery across Nouns, Verbs, Adjectives, Travel, Business and more.">
+  <title>Flash Card Learning — Word Categories</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@400,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-categories">
+
+  <!-- ═══════════════ SIDEBAR (Desktop) ════════════════ -->
+  <aside class="app-sidebar" aria-label="Navigation">
+    <div class="sidebar-header">
+      <div class="sidebar-title">Study Progress</div>
+      <div class="sidebar-subtitle">Level: Intermediate</div>
+    </div>
+    <nav class="sidebar-nav" aria-label="Sidebar navigation">
+      <a href="study.html" class="sidebar-link">
+        <span class="material-symbols-outlined" aria-hidden="true">library_books</span>
+        All Words
+      </a>
+      <a href="categories.html" class="sidebar-link active" aria-current="page">
+        <span class="material-symbols-outlined" aria-hidden="true">category</span>
+        Categories
+      </a>
+      <a href="quiz.html" class="sidebar-link">
+        <span class="material-symbols-outlined" aria-hidden="true">quiz</span>
+        Daily Quiz
+      </a>
+      <a href="study.html?mode=favorites" class="sidebar-link">
+        <span class="material-symbols-outlined" aria-hidden="true">grade</span>
+        Favorites
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="sidebar-cta" onclick="location.href='quiz.html'">Start Daily Quiz</button>
+    </div>
+  </aside>
+
+  <!-- ═══════════════ HEADER ════════════════ -->
+  <header class="app-header">
+    <div class="header-brand">
+      <a href="study.html" class="icon-btn" aria-label="Go back to study">
+        <span class="material-symbols-outlined">arrow_back</span>
+      </a>
+      <div class="header-logo-icon" aria-hidden="true">
+        <span class="material-symbols-outlined">style</span>
+      </div>
+      <span class="header-app-name">Flash Card Learning</span>
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn" aria-label="Logout" onclick="location.href='index.html'">
+        <span class="material-symbols-outlined">logout</span>
+      </button>
+      <div class="avatar-btn" aria-hidden="true">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhmyMvMapgCGLhEHUElfUfcxPN3xDLoIEKWs4dFFFom6QNrUOWZDymqMTv2HQ_Fo9VodtSM0FcUeeM-6317m6VwcT_0Bg0hHE0YIzH4Y5nuOdZBnX3FV46XZmbbZDjdUPWrUMKHzin7BBMPSuF8jhAbd9Bal8xTxClg7m2kzIfqeCLHMcvP9OOfpfxqa4cUs7wWj1n0DfmFjhWH0MvacPaRKHoJTK0GNWeaImOk7hxi-EDcVph4B8JpEdk7eOzwXkfHahctD2fQoHV" alt="User avatar">
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════ MAIN CONTENT ════════════════ -->
+  <main class="categories-layout">
+
+    <!-- Page Title -->
+    <div class="page-title-row animate-in">
+      <div>
+        <h1 class="page-title">Word Categories</h1>
+        <p class="page-subtitle">Organize your vocabulary with curated sets. Track your mastery across different topics.</p>
+      </div>
+      <button class="btn-primary" id="create-cat-btn" aria-label="Create new category">
+        <span class="material-symbols-outlined" aria-hidden="true">add</span>
+        Create New Category
+      </button>
+    </div>
+
+    <!-- Search & Filter -->
+    <div class="filter-row animate-in">
+      <div class="search-wrap flex-1">
+        <span class="material-symbols-outlined search-icon" aria-hidden="true">search</span>
+        <input
+          type="search"
+          id="cat-search"
+          class="form-input"
+          placeholder="Search categories..."
+          aria-label="Search word categories"
+        >
+      </div>
+      <div class="filter-actions">
+        <button class="btn-ghost" aria-label="Filter categories">
+          <span class="material-symbols-outlined" aria-hidden="true">filter_list</span>
+          Filter
+        </button>
+        <button class="btn-ghost" aria-label="Sort categories">
+          <span class="material-symbols-outlined" aria-hidden="true">sort</span>
+          Sort
+        </button>
+      </div>
+    </div>
+
+    <!-- Category Cards Grid -->
+    <div class="categories-grid" id="categories-grid" aria-label="Word categories">
+
+      <!-- Nouns -->
+      <article class="category-card animate-in" onclick="location.href='study.html?category=Noun'" tabindex="0" aria-label="Nouns category — 420 words, 85% mastered">
+        <div class="cat-card-header">
+          <div class="cat-card-icon cat-card-icon--blue">
+            <span class="material-symbols-outlined" aria-hidden="true">label</span>
+          </div>
+          <span class="cat-card-badge cat-card-badge--blue">Essential</span>
+        </div>
+        <div class="cat-card-title">Nouns</div>
+        <button class="cat-speak-btn text-primary" onclick="event.stopPropagation(); location.href='speak.html?word=Adventure'" aria-label="Speak test for Nouns">
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:1rem">mic</span>
+          Speak Test
+        </button>
+        <p class="cat-card-desc">Everyday objects, places, and people. The foundation of your English vocabulary.</p>
+        <div class="cat-card-footer">
+          <div class="cat-card-meta">
+            <span class="count">420 Words</span>
+            <span class="text-primary">85% Mastered</span>
+          </div>
+          <div class="progress-track progress-shine-anim">
+            <div class="progress-fill progress-fill--primary" style="width:85%"></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Verbs -->
+      <article class="category-card animate-in" onclick="location.href='study.html?category=Verb'" tabindex="0" aria-label="Verbs category — 315 words, 62% mastered">
+        <div class="cat-card-header">
+          <div class="cat-card-icon cat-card-icon--green">
+            <span class="material-symbols-outlined" aria-hidden="true">directions_run</span>
+          </div>
+          <span class="cat-card-badge cat-card-badge--green">Core</span>
+        </div>
+        <div class="cat-card-title">Verbs</div>
+        <button class="cat-speak-btn text-secondary" onclick="event.stopPropagation(); location.href='speak.html?word=Persevere'" aria-label="Speak test for Verbs">
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:1rem">mic</span>
+          Speak Test
+        </button>
+        <p class="cat-card-desc">Action words and states of being. Essential for building complete and dynamic sentences.</p>
+        <div class="cat-card-footer">
+          <div class="cat-card-meta">
+            <span class="count">315 Words</span>
+            <span class="text-secondary">62% Mastered</span>
+          </div>
+          <div class="progress-track progress-shine-anim">
+            <div class="progress-fill progress-fill--secondary" style="width:62%"></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Adjectives -->
+      <article class="category-card animate-in" onclick="location.href='study.html?category=Adjective'" tabindex="0" aria-label="Adjectives category — 280 words, 45% mastered">
+        <div class="cat-card-header">
+          <div class="cat-card-icon cat-card-icon--amber">
+            <span class="material-symbols-outlined" aria-hidden="true">format_paint</span>
+          </div>
+          <span class="cat-card-badge cat-card-badge--amber">Creative</span>
+        </div>
+        <div class="cat-card-title">Adjectives</div>
+        <button class="cat-speak-btn text-tertiary" onclick="event.stopPropagation(); location.href='speak.html?word=Ebullient'" aria-label="Speak test for Adjectives">
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:1rem">mic</span>
+          Speak Test
+        </button>
+        <p class="cat-card-desc">Descriptive words to add color and precision to your conversations and writing.</p>
+        <div class="cat-card-footer">
+          <div class="cat-card-meta">
+            <span class="count">280 Words</span>
+            <span class="text-tertiary">45% Mastered</span>
+          </div>
+          <div class="progress-track progress-shine-anim">
+            <div class="progress-fill progress-fill--tertiary" style="width:45%"></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Travel -->
+      <article class="category-card animate-in" onclick="location.href='study.html?category=Travel'" tabindex="0" aria-label="Travel category — 150 words, 20% mastered">
+        <div class="cat-card-header">
+          <div class="cat-card-icon cat-card-icon--blue">
+            <span class="material-symbols-outlined" aria-hidden="true">flight_takeoff</span>
+          </div>
+          <span class="cat-card-badge cat-card-badge--blue">Situational</span>
+        </div>
+        <div class="cat-card-title">Travel</div>
+        <button class="cat-speak-btn text-primary" onclick="event.stopPropagation(); location.href='speak.html?word=Destination'" aria-label="Speak test for Travel">
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:1rem">mic</span>
+          Speak Test
+        </button>
+        <p class="cat-card-desc">Airports, hotels, directions, and ordering food. Pack these words for your next trip!</p>
+        <div class="cat-card-footer">
+          <div class="cat-card-meta">
+            <span class="count">150 Words</span>
+            <span class="text-primary">20% Mastered</span>
+          </div>
+          <div class="progress-track progress-shine-anim">
+            <div class="progress-fill progress-fill--primary" style="width:20%"></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Business -->
+      <article class="category-card animate-in" onclick="location.href='study.html?category=Business'" tabindex="0" aria-label="Business category — 210 words, 12% mastered">
+        <div class="cat-card-header">
+          <div class="cat-card-icon cat-card-icon--green">
+            <span class="material-symbols-outlined" aria-hidden="true">work</span>
+          </div>
+          <span class="cat-card-badge cat-card-badge--green">Professional</span>
+        </div>
+        <div class="cat-card-title">Business</div>
+        <button class="cat-speak-btn text-secondary" onclick="event.stopPropagation(); location.href='speak.html?word=Transaction'" aria-label="Speak test for Business">
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:1rem">mic</span>
+          Speak Test
+        </button>
+        <p class="cat-card-desc">Vocabulary for meetings, presentations, and professional networking environments.</p>
+        <div class="cat-card-footer">
+          <div class="cat-card-meta">
+            <span class="count">210 Words</span>
+            <span class="text-secondary">12% Mastered</span>
+          </div>
+          <div class="progress-track progress-shine-anim">
+            <div class="progress-fill progress-fill--secondary" style="width:12%"></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Academic -->
+      <article class="category-card animate-in" onclick="location.href='study.html?category=Academic'" tabindex="0" aria-label="Academic category — 190 words, not started">
+        <div class="cat-card-header">
+          <div class="cat-card-icon cat-card-icon--amber">
+            <span class="material-symbols-outlined" aria-hidden="true">school</span>
+          </div>
+          <span class="cat-card-badge cat-card-badge--amber">Formal</span>
+        </div>
+        <div class="cat-card-title">Academic</div>
+        <button class="cat-speak-btn text-tertiary" onclick="event.stopPropagation(); location.href='speak.html?word=Curriculum'" aria-label="Speak test for Academic">
+          <span class="material-symbols-outlined" aria-hidden="true" style="font-size:1rem">mic</span>
+          Speak Test
+        </button>
+        <p class="cat-card-desc">Complex terminology and formal structures used in research and university settings.</p>
+        <div class="cat-card-footer">
+          <div class="cat-card-meta">
+            <span class="count">190 Words</span>
+            <span class="text-tertiary">0% Mastered</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill progress-fill--tertiary" style="width:0%"></div>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /categories-grid -->
+
+  </main>
+
+  <!-- ═══════════════ BOTTOM NAV (Mobile) ════════════════ -->
+  <nav class="bottom-nav" aria-label="Mobile navigation">
+    <a href="study.html" class="bottom-nav-btn">
+      <span class="material-symbols-outlined" aria-hidden="true">style</span>
+      Study
+    </a>
+    <a href="#" class="bottom-nav-btn">
+      <span class="material-symbols-outlined" aria-hidden="true">leaderboard</span>
+      Stats
+    </a>
+    <a href="categories.html" class="bottom-nav-btn active" aria-current="page">
+      <span class="material-symbols-outlined icon-fill" aria-hidden="true">category</span>
+      Categories
+    </a>
+    <a href="quiz.html" class="bottom-nav-btn">
+      <span class="material-symbols-outlined" aria-hidden="true">quiz</span>
+      Quiz
+    </a>
+  </nav>
+
+  <script>
+    // Search filter
+    document.getElementById('cat-search').addEventListener('input', function() {
+      const q = this.value.toLowerCase();
+      document.querySelectorAll('.category-card').forEach(card => {
+        const title = card.querySelector('.cat-card-title').textContent.toLowerCase();
+        const desc  = card.querySelector('.cat-card-desc').textContent.toLowerCase();
+        card.style.display = (title.includes(q) || desc.includes(q)) ? '' : 'none';
+      });
+    });
+
+    // Keyboard navigation for cards
+    document.querySelectorAll('.category-card').forEach(card => {
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Flash Card Learning — Progress Statistics Dashboard. View your vocabulary mastery and consistency heatmap.">
+  <title>Flash Card Learning — Statistics Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@400,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .heatmap-grid {
+      display: grid;
+      grid-template-columns: repeat(26, 1fr);
+      gap: 4px;
+      min-width: 600px;
+    }
+    .heatmap-cell {
+      aspect-ratio: 1;
+      border-radius: 3px;
+      transition: transform 0.1s var(--ease-spring);
+      cursor: pointer;
+    }
+    .heatmap-cell:hover {
+      transform: scale(1.2);
+      z-index: 2;
+    }
+    .chart-bar {
+      width: 32px;
+      border-radius: 4px 4px 0 0;
+      transition: height 0.6s var(--ease-spring);
+    }
+  </style>
+</head>
+<body class="page-categories">
+
+  <!-- ═══════════════ SIDEBAR (Desktop) ════════════════ -->
+  <aside class="app-sidebar" aria-label="Navigation">
+    <div class="sidebar-header">
+      <div class="sidebar-title">Study Progress</div>
+      <div class="sidebar-subtitle">Level: Intermediate</div>
+    </div>
+    <nav class="sidebar-nav" aria-label="Sidebar navigation">
+      <a href="study.html" class="sidebar-link">
+        <span class="material-symbols-outlined" aria-hidden="true">library_books</span>
+        All Words
+      </a>
+      <a href="categories.html" class="sidebar-link">
+        <span class="material-symbols-outlined" aria-hidden="true">category</span>
+        Categories
+      </a>
+      <a href="quiz.html" class="sidebar-link">
+        <span class="material-symbols-outlined" aria-hidden="true">quiz</span>
+        Daily Quiz
+      </a>
+      <a href="study.html?mode=favorites" class="sidebar-link">
+        <span class="material-symbols-outlined" aria-hidden="true">grade</span>
+        Favorites
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="sidebar-cta" onclick="location.href='quiz.html'">Start Daily Quiz</button>
+    </div>
+  </aside>
+
+  <!-- ═══════════════ HEADER ════════════════ -->
+  <header class="app-header">
+    <div class="header-brand">
+      <a href="study.html" class="icon-btn" aria-label="Go back to study">
+        <span class="material-symbols-outlined">arrow_back</span>
+      </a>
+      <div class="header-logo-icon" aria-hidden="true">
+        <span class="material-symbols-outlined">style</span>
+      </div>
+      <span class="header-app-name">Flash Card Learning</span>
+    </div>
+    <nav class="header-nav-links" aria-label="Top navigation">
+      <a href="study.html" class="nav-link">Study</a>
+      <a href="#" class="nav-link active">Stats</a>
+      <a href="categories.html" class="nav-link">Categories</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" aria-label="Logout" onclick="location.href='index.html'">
+        <span class="material-symbols-outlined">logout</span>
+      </button>
+      <div class="avatar-btn" aria-hidden="true">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhmyMvMapgCGLhEHUElfUfcxPN3xDLoIEKWs4dFFFom6QNrUOWZDymqMTv2HQ_Fo9VodtSM0FcUeeM-6317m6VwcT_0Bg0hHE0YIzH4Y5nuOdZBnX3FV46XZmbbZDjdUPWrUMKHzin7BBMPSuF8jhAbd9Bal8xTxClg7m2kzIfqeCLHMcvP9OOfpfxqa4cUs7wWj1n0DfmFjhWH0MvacPaRKHoJTK0GNWeaImOk7hxi-EDcVph4B8JpEdk7eOzwXkfHahctD2fQoHV" alt="User avatar">
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════ MAIN CONTENT ════════════════ -->
+  <main class="categories-layout">
+
+    <div class="page-title-row animate-in">
+      <div>
+        <h1 class="page-title">Learning Stats</h1>
+        <p class="page-subtitle">Your English Quest journey progress and study milestones.</p>
+      </div>
+      <button class="btn-primary" onclick="location.href='quiz.html'">
+        <span class="material-symbols-outlined" aria-hidden="true">bolt</span>
+        Start Daily Quiz
+      </button>
+    </div>
+
+    <!-- Summary Grid -->
+    <div class="stats-row animate-in" style="margin-bottom:28px">
+      <div class="stat-card">
+        <div class="stat-icon stat-icon--blue">
+          <span class="material-symbols-outlined">school</span>
+        </div>
+        <div class="stat-info">
+          <div class="stat-label-text">Total Learned</div>
+          <div class="stat-value-text primary">1,284 Words</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon stat-icon--green">
+          <span class="material-symbols-outlined">verified</span>
+        </div>
+        <div class="stat-info">
+          <div class="stat-label-text">Mastery Rate</div>
+          <div class="stat-value-text secondary" id="stats-mastery-text">78%</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon stat-icon--amber">
+          <span class="material-symbols-outlined">timer</span>
+        </div>
+        <div class="stat-info">
+          <div class="stat-label-text">Study Time</div>
+          <div class="stat-value-text tertiary">24.5 Hours</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chart & Heatmap Card -->
+    <div class="card animate-in" style="margin-bottom:28px">
+      <h2 class="card-title">
+        <span class="material-symbols-outlined">calendar_today</span>
+        Weekly Performance
+      </h2>
+      <div style="display:flex;align-items:flex-end;justify-content:space-around;height:180px;border-bottom:2px solid var(--outline-variant);padding-bottom:12px;margin-bottom:12px">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="chart-bar" style="height:70px;background:var(--primary)"></div>
+          <span class="t-label-sm text-muted">Mon</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="chart-bar" style="height:110px;background:var(--primary)"></div>
+          <span class="t-label-sm text-muted">Tue</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="chart-bar" style="height:60px;background:var(--primary)"></div>
+          <span class="t-label-sm text-muted">Wed</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="chart-bar" style="height:140px;background:var(--primary)"></div>
+          <span class="t-label-sm text-muted">Thu</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="chart-bar" style="height:85px;background:var(--primary)"></div>
+          <span class="t-label-sm text-muted">Fri</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="chart-bar" style="height:160px;background:var(--primary)"></div>
+          <span class="t-label-sm text-muted">Sat</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="chart-bar" style="height:120px;background:var(--primary)"></div>
+          <span class="t-label-sm text-muted">Sun</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Heatmap Card -->
+    <div class="card animate-in" style="overflow-x:auto">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;min-w:max-content">
+        <h2 class="card-title" style="margin-bottom:0">Study Consistency Heatmap</h2>
+        <div style="display:flex;align-items:center;gap:8px;font-size:0.8rem;color:var(--on-surface-variant)">
+          <span>Less</span>
+          <span style="display:flex;gap:3px">
+            <span style="width:12px;height:12px;background:var(--surface-high);border-radius:2px"></span>
+            <span style="width:12px;height:12px;background:rgba(0, 93, 167, 0.25);border-radius:2px"></span>
+            <span style="width:12px;height:12px;background:rgba(0, 93, 167, 0.6);border-radius:2px"></span>
+            <span style="width:12px;height:12px;background:var(--primary);border-radius:2px"></span>
+          </span>
+          <span>More</span>
+        </div>
+      </div>
+      <div class="heatmap-grid" id="heatmap-grid">
+        <!-- Rendered dynamically by javascript -->
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ═══════════════ BOTTOM NAV (Mobile) ════════════════ -->
+  <nav class="bottom-nav" aria-label="Mobile navigation">
+    <button onclick="location.href='study.html'" class="bottom-nav-btn">
+      <span class="material-symbols-outlined" aria-hidden="true">style</span>
+      Study
+    </button>
+    <button onclick="location.href='stats.html'" class="bottom-nav-btn active" aria-current="page">
+      <span class="material-symbols-outlined icon-fill" aria-hidden="true">leaderboard</span>
+      Stats
+    </button>
+    <button onclick="location.href='categories.html'" class="bottom-nav-btn">
+      <span class="material-symbols-outlined" aria-hidden="true">category</span>
+      Categories
+    </button>
+    <button onclick="location.href='quiz.html'" class="bottom-nav-btn">
+      <span class="material-symbols-outlined" aria-hidden="true">quiz</span>
+      Quiz
+    </button>
+  </nav>
+
+  <script>
+    // Generate heatmap cells dynamically to prevent HTML bloat
+    const container = document.getElementById('heatmap-grid');
+    if (container) {
+      const cellCount = 26 * 7;
+      for (let i = 0; i < cellCount; i++) {
+        const val = Math.random();
+        let bg = 'var(--surface-high)';
+        if (val > 0.8) bg = 'var(--primary)';
+        else if (val > 0.5) bg = 'rgba(0, 93, 167, 0.6)';
+        else if (val > 0.2) bg = 'rgba(0, 93, 167, 0.25)';
+
+        const cell = document.createElement('div');
+        cell.className = 'heatmap-cell';
+        cell.style.background = bg;
+        cell.title = `Activity index: ${Math.round(val * 100)}%`;
+        container.appendChild(cell);
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Flash Card Learning — Gamified English vocabulary flashcard app. Login to start leveling up your vocabulary.">
+  <title>Flash Card Learning — Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@400,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-login">
+
+  <!-- Pixel corner decorations -->
+  <div class="pixel-decor pixel-decor--tl" aria-hidden="true">
+    <div class="pixel-grid pixel-grid--blue">
+      <span></span><span></span><span></span>
+      <span></span><span style="opacity:0"></span><span></span>
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  <div class="pixel-decor pixel-decor--br" aria-hidden="true">
+    <div class="pixel-grid pixel-grid--green">
+      <span></span><span style="opacity:0"></span><span></span>
+      <span style="opacity:0"></span><span></span><span style="opacity:0"></span>
+      <span></span><span style="opacity:0"></span><span></span>
+    </div>
+  </div>
+
+  <!-- Bottom color strip -->
+  <div class="color-strip" aria-hidden="true">
+    <span style="background:var(--primary)"></span>
+    <span style="background:var(--secondary)"></span>
+    <span style="background:var(--tertiary)"></span>
+    <span style="background:var(--primary-container)"></span>
+    <span style="background:var(--secondary-container)"></span>
+  </div>
+
+  <main class="login-main">
+
+    <!-- Brand Header -->
+    <div class="login-brand">
+      <div class="brand-icon">
+        <span class="material-symbols-outlined" style="font-size:2rem">style</span>
+      </div>
+      <h1 class="login-title">FLASH CARD<br>LEARNING</h1>
+      <p class="login-subtitle">Level Up Your Vocabulary</p>
+    </div>
+
+    <!-- Login Card -->
+    <div class="login-card">
+      <div class="corner-accent" aria-hidden="true"></div>
+
+      <!-- Email / Password form -->
+      <form id="login-form" class="login-form" novalidate>
+        <div class="form-group">
+          <label for="email-input" class="form-label">Email</label>
+          <input type="email" id="email-input" class="form-input" placeholder="name@example.com" autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label for="pass-input" class="form-label">Password</label>
+          <input type="password" id="pass-input" class="form-input" placeholder="••••••••" autocomplete="current-password">
+        </div>
+        <div class="forgot-row">
+          <a href="#" class="forgot-link">Forgot password?</a>
+        </div>
+        <button type="submit" class="btn-login" onclick="goToStudy(event)">Login</button>
+      </form>
+
+      <div class="divider"><span>or login with</span></div>
+
+      <!-- Social logins -->
+      <div class="social-btns">
+        <button class="btn-social btn-social--google" onclick="goToStudy(event)">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrlIrg3F6u7YwT8M6vTJKKex5-9VnNaK00hcZV93qlxHbjOhXucgfm5iSYo5e37PprxlEW3orsiwMF0JYbfNLxMW3qn0tjhSVKk2fRy_Kna7lDWBBydDLh0IQqe61Y9S5vi4NetMC4OlfMXnE8_hNEzZWLMVpu2b13EOla1tFA5RtUBo8JuXmEKEy39aKTcS4qnCKS5umVt4MgaQUDKojlLtvbnnOYE1RbdEZrqopuz73VG5FtkKD_XJl_DGgVJ5JoW2SOhbKvNkPJ" alt="Google logo" class="social-logo" width="24" height="24">
+          Continue with Google
+        </button>
+        <button class="btn-social btn-social--facebook" onclick="goToStudy(event)">
+          <svg class="social-logo" viewBox="0 0 24 24" fill="currentColor" width="24" height="24" aria-hidden="true">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+          Continue with Facebook
+        </button>
+      </div>
+
+      <div class="divider"><span>or</span></div>
+
+      <!-- Guest access -->
+      <button class="btn-guest" id="guest-btn" onclick="goToStudy(event)">
+        <span class="material-symbols-outlined" aria-hidden="true">rocket_launch</span>
+        Continue as Guest
+      </button>
+
+      <p class="terms-text">
+        By continuing, you agree to our
+        <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+      </p>
+    </div>
+
+    <!-- Sign up link -->
+    <div class="signup-row">
+      <p>Don't have an account?</p>
+      <button class="btn-signup">Create Account</button>
+    </div>
+
+  </main>
+
+  <script>
+    function goToStudy(e) {
+      e.preventDefault();
+      const btn = e.currentTarget;
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<span class="material-symbols-outlined spin-anim">progress_activity</span>&nbsp;Entering Game...';
+      btn.disabled = true;
+      btn.style.opacity = '0.75';
+      setTimeout(() => { window.location.href = 'study.html'; }, 900);
+    }
+
+    // Parallax shadow on login card
+    document.addEventListener('mousemove', (e) => {
+      const card = document.querySelector('.login-card');
+      if (!card) return;
+      const xShift = (window.innerWidth  / 2 - e.pageX) / 60;
+      const yShift = (window.innerHeight / 2 - e.pageY) / 60;
+      card.style.boxShadow = `${4 + xShift/2}px ${4 + yShift/2}px 0 rgba(0,0,0,0.12)`;
+    });
+  </script>
+</body>
+</html>

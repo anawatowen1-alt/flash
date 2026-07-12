@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Flash Card Learning — Favorites Glossary. Review all your favorited vocabulary.">
+  <title>Flash Card Learning — Favorites</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@400,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .fav-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .fav-item {
+      background: var(--surface-white);
+      border: 2px solid var(--outline-variant);
+      border-radius: 16px;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-card);
+      transition: all 0.15s var(--ease-spring);
+    }
+    .fav-item:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translate(-1px,-1px);
+    }
+  </style>
+</head>
+<body class="page-categories">
+
+  <!-- ═══════════════ SIDEBAR (Desktop) ════════════════ -->
+  <aside class="app-sidebar" aria-label="Navigation">
+    <div class="sidebar-header">
+      <div class="sidebar-title">Study Progress</div>
+      <div class="sidebar-subtitle">Level: Intermediate</div>
+    </div>
+    <nav class="sidebar-nav" aria-label="Sidebar navigation">
+      <a href="study.html" class="sidebar-link">
+        <span class="material-symbols-outlined" aria-hidden="true">library_books</span>
+        All Words
+      </a>
+      <a href="categories.html" class="sidebar-link">
+        <span class="material-symbols-outlined" aria-hidden="true">category</span>
+        Categories
+      </a>
+      <a href="quiz.html" class="sidebar-link">
+        <span class="material-symbols-outlined" aria-hidden="true">quiz</span>
+        Daily Quiz
+      </a>
+      <a href="favorites.html" class="sidebar-link active" aria-current="page">
+        <span class="material-symbols-outlined icon-fill" aria-hidden="true">grade</span>
+        Favorites
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="sidebar-cta" onclick="location.href='quiz.html'">Start Daily Quiz</button>
+    </div>
+  </aside>
+
+  <!-- ═══════════════ HEADER ════════════════ -->
+  <header class="app-header">
+    <div class="header-brand">
+      <a href="study.html" class="icon-btn" aria-label="Go back to study">
+        <span class="material-symbols-outlined">arrow_back</span>
+      </a>
+      <div class="header-logo-icon" aria-hidden="true">
+        <span class="material-symbols-outlined">style</span>
+      </div>
+      <span class="header-app-name">Flash Card Learning</span>
+    </div>
+    <nav class="header-nav-links" aria-label="Top navigation">
+      <a href="study.html" class="nav-link">Study</a>
+      <a href="favorites.html" class="nav-link active">Favorites</a>
+      <a href="categories.html" class="nav-link">Categories</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" aria-label="Logout" onclick="location.href='index.html'">
+        <span class="material-symbols-outlined">logout</span>
+      </button>
+      <div class="avatar-btn" aria-hidden="true">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhmyMvMapgCGLhEHUElfUfcxPN3xDLoIEKWs4dFFFom6QNrUOWZDymqMTv2HQ_Fo9VodtSM0FcUeeM-6317m6VwcT_0Bg0hHE0YIzH4Y5nuOdZBnX3FV46XZmbbZDjdUPWrUMKHzin7BBMPSuF8jhAbd9Bal8xTxClg7m2kzIfqeCLHMcvP9OOfpfxqa4cUs7wWj1n0DfmFjhWH0MvacPaRKHoJTK0GNWeaImOk7hxi-EDcVph4B8JpEdk7eOzwXkfHahctD2fQoHV" alt="User avatar">
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════ MAIN CONTENT ════════════════ -->
+  <main class="categories-layout">
+
+    <div class="page-title-row animate-in">
+      <div>
+        <h1 class="page-title">Your Favorites</h1>
+        <p class="page-subtitle">Master the vocabulary you've flagged for extra focus.</p>
+      </div>
+      <button class="btn-primary" onclick="location.href='study.html?mode=favorites'">
+        <span class="material-symbols-outlined" aria-hidden="true">bolt</span>
+        Start Study with Favorites
+      </button>
+    </div>
+
+    <!-- Search bar -->
+    <div class="filter-row animate-in">
+      <div class="search-wrap flex-1">
+        <span class="material-symbols-outlined search-icon" aria-hidden="true">search</span>
+        <input
+          type="search"
+          id="fav-search"
+          class="form-input"
+          placeholder="Search favorited words..."
+          aria-label="Search favorites"
+        >
+      </div>
+    </div>
+
+    <!-- Favorites List -->
+    <div class="fav-list animate-in" id="favorites-list">
+      <!-- Dynamic list of favorites -->
+    </div>
+
+    <div id="no-favorites" class="empty-state" style="display:none;margin-top:20px">
+      <div class="empty-icon">
+        <span class="material-symbols-outlined">grade</span>
+      </div>
+      <h2 class="empty-title">No Favorites Yet</h2>
+      <p class="empty-desc">Flag words during study sessions to review them in this library.</p>
+    </div>
+
+  </main>
+
+  <!-- ═══════════════ BOTTOM NAV (Mobile) ════════════════ -->
+  <nav class="bottom-nav" aria-label="Mobile navigation">
+    <button onclick="location.href='study.html'" class="bottom-nav-btn">
+      <span class="material-symbols-outlined" aria-hidden="true">style</span>
+      Study
+    </button>
+    <button onclick="location.href='stats.html'" class="bottom-nav-btn">
+      <span class="material-symbols-outlined" aria-hidden="true">leaderboard</span>
+      Stats
+    </button>
+    <button onclick="location.href='categories.html'" class="bottom-nav-btn">
+      <span class="material-symbols-outlined" aria-hidden="true">category</span>
+      Categories
+    </button>
+    <button onclick="location.href='favorites.html'" class="bottom-nav-btn active" aria-current="page">
+      <span class="material-symbols-outlined icon-fill" aria-hidden="true">grade</span>
+      Favorites
+    </button>
+  </nav>
+
+  <script>
+    // Mock vocab matching app.js to show items if localStorage is empty
+    const MOCK_VOCAB = [
+      { word: 'Adventure', translation: 'การผจญภัย', pos: 'Noun', posClass: 'tag--noun' },
+      { word: 'Ebullient', translation: 'มีชีวิตชีวา', pos: 'Adjective', posClass: 'tag--adj' },
+      { word: 'Persevere', translation: 'อดทน', pos: 'Verb', posClass: 'tag--verb' }
+    ];
+
+    function loadFavorites() {
+      const favList = JSON.parse(localStorage.getItem('fc_favorites') || '[]');
+      const container = document.getElementById('favorites-list');
+      const emptyState = document.getElementById('no-favorites');
+
+      container.innerHTML = '';
+
+      // If empty, pre-populate with demo favorites to make prototype look fully functional
+      const activeList = favList.length > 0 ? favList : ['Adventure', 'Ebullient', 'Persevere'];
+      if (favList.length === 0) {
+        localStorage.setItem('fc_favorites', JSON.stringify(activeList));
+      }
+
+      activeList.forEach(word => {
+        // Find metadata matching word
+        const meta = MOCK_VOCAB.find(v => v.word.toLowerCase() === word.toLowerCase()) || {
+          word: word,
+          translation: 'Vocabulary word definition',
+          pos: 'Word',
+          posClass: 'tag--primary'
+        };
+
+        const item = document.createElement('div');
+        item.className = 'fav-item';
+        item.dataset.word = meta.word;
+        item.innerHTML = `
+          <div style="display:flex;align-items:center;gap:12px">
+            <span class="tag ${meta.posClass}">${meta.pos}</span>
+            <strong class="t-card-text" style="font-size:1.15rem;color:var(--on-surface)">${meta.word}</strong>
+            <span style="font-size:0.9rem;color:var(--on-surface-variant)">— ${meta.translation}</span>
+          </div>
+          <div style="display:flex;gap:8px">
+            <button class="icon-btn" aria-label="Listen pronunciation" onclick="speakWord('${meta.word}')">
+              <span class="material-symbols-outlined">volume_up</span>
+            </button>
+            <button class="icon-btn" aria-label="Remove favorite" onclick="removeFav('${meta.word}', this)">
+              <span class="material-symbols-outlined" style="color:var(--error)">delete</span>
+            </button>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+
+      emptyState.style.display = activeList.length === 0 ? '' : 'none';
+    }
+
+    window.speakWord = function(word) {
+      if ('speechSynthesis' in window) {
+        const u = new SpeechSynthesisUtterance(word);
+        u.lang = 'en-US';
+        speechSynthesis.speak(u);
+      }
+    };
+
+    window.removeFav = function(word, btn) {
+      let favList = JSON.parse(localStorage.getItem('fc_favorites') || '[]');
+      favList = favList.filter(f => f !== word);
+      localStorage.setItem('fc_favorites', JSON.stringify(favList));
+      btn.closest('.fav-item').remove();
+
+      if (favList.length === 0) {
+        document.getElementById('no-favorites').style.display = '';
+      }
+    };
+
+    // Filter list
+    document.getElementById('fav-search').addEventListener('input', function() {
+      const q = this.value.toLowerCase();
+      document.querySelectorAll('.fav-item').forEach(item => {
+        const word = item.dataset.word.toLowerCase();
+        item.style.display = word.includes(q) ? '' : 'none';
+      });
+    });
+
+    window.addEventListener('DOMContentLoaded', loadFavorites);
+  </script>
+</body>
+</html>

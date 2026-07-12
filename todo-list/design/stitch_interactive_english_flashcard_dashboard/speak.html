@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Flash Card Learning — Pronunciation Practice Speak Test. Practise speaking vocabulary with instant scoring feedback.">
+  <title>Flash Card Learning — Speak Test</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@400,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .waveform-wrap {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 3px;
+      height: 90px;
+      margin: 24px 0;
+      padding: 0 16px;
+    }
+    .waveform-bar {
+      width: 6px;
+      min-height: 8px;
+      background: var(--primary-fixed-dim);
+      border-radius: 100px;
+      transition: height 0.1s ease;
+    }
+    .waveform-bar.active {
+      background: var(--primary);
+    }
+    .mic-button {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 0 var(--primary-dark);
+      transition: all 0.12s;
+    }
+    .mic-button:active {
+      box-shadow: 0 2px 0 var(--primary-dark);
+      transform: translateY(6px);
+    }
+    .mic-button.recording {
+      background: var(--error);
+      box-shadow: 0 6px 0 #8b0000;
+      animation: pulse-recording 1.5s infinite;
+    }
+    @keyframes pulse-recording {
+      0% { box-shadow: 0 0 0 0 rgba(186, 26, 26, 0.4); }
+      70% { box-shadow: 0 0 0 16px rgba(186, 26, 26, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(186, 26, 26, 0); }
+    }
+    .score-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-family: var(--font-label);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-top: 16px;
+      animation: card-in 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+  </style>
+</head>
+<body class="page-categories">
+
+  <!-- ═══════════════ SIDEBAR (Desktop) ════════════════ -->
+  <aside class="app-sidebar" aria-label="Navigation">
+    <div class="sidebar-header">
+      <div class="sidebar-title">Study Progress</div>
+      <div class="sidebar-subtitle">Level: Intermediate</div>
+    </div>
+    <nav class="sidebar-nav" aria-label="Sidebar navigation">
+      <a href="study.html" class="sidebar-link">
+        <span class="material-symbols-outlined" aria-hidden="true">library_books</span>
+        All Words
+      </a>
+      <a href="categories.html" class="sidebar-link">
+        <span class="material-symbols-outlined" aria-hidden="true">category</span>
+        Categories
+      </a>
+      <a href="quiz.html" class="sidebar-link">
+        <span class="material-symbols-outlined" aria-hidden="true">quiz</span>
+        Daily Quiz
+      </a>
+      <a href="favorites.html" class="sidebar-link">
+        <span class="material-symbols-outlined" aria-hidden="true">grade</span>
+        Favorites
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="sidebar-cta" onclick="location.href='quiz.html'">Start Daily Quiz</button>
+    </div>
+  </aside>
+
+  <!-- ═══════════════ HEADER ════════════════ -->
+  <header class="app-header">
+    <div class="header-brand">
+      <button class="icon-btn" aria-label="Go back" onclick="window.history.back()">
+        <span class="material-symbols-outlined">arrow_back</span>
+      </button>
+      <div class="header-logo-icon" aria-hidden="true">
+        <span class="material-symbols-outlined">style</span>
+      </div>
+      <span class="header-app-name">Flash Card Learning</span>
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn" aria-label="Logout" onclick="location.href='index.html'">
+        <span class="material-symbols-outlined">logout</span>
+      </button>
+      <div class="avatar-btn" aria-hidden="true">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhmyMvMapgCGLhEHUElfUfcxPN3xDLoIEKWs4dFFFom6QNrUOWZDymqMTv2HQ_Fo9VodtSM0FcUeeM-6317m6VwcT_0Bg0hHE0YIzH4Y5nuOdZBnX3FV46XZmbbZDjdUPWrUMKHzin7BBMPSuF8jhAbd9Bal8xTxClg7m2kzIfqeCLHMcvP9OOfpfxqa4cUs7wWj1n0DfmFjhWH0MvacPaRKHoJTK0GNWeaImOk7hxi-EDcVph4B8JpEdk7eOzwXkfHahctD2fQoHV" alt="User avatar">
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════ MAIN CONTENT ════════════════ -->
+  <main class="categories-layout">
+
+    <div class="page-title-row animate-in">
+      <div>
+        <h1 class="page-title">Pronunciation Practice</h1>
+        <p class="page-subtitle">Speak the word clearly into your microphone to verify and rate your accent.</p>
+      </div>
+      <button class="btn-ghost" onclick="speakDemoWord()">
+        <span class="material-symbols-outlined" aria-hidden="true">volume_up</span>
+        Listen Native Accent
+      </button>
+    </div>
+
+    <!-- Active Practice Card -->
+    <div class="card card-xl animate-in text-center" style="margin-bottom:28px;padding:40px 24px">
+      <span class="tag tag--primary" style="margin-bottom:12px" id="speak-pos">Vocabulary Practice</span>
+      <h2 class="t-headline-xl text-primary" id="speak-word" style="margin-bottom:6px">Ameliorate</h2>
+      <p class="t-label text-muted" id="speak-phonetic" style="margin-bottom:24px">/əˈmiːliəreɪt/</p>
+
+      <!-- Waveform Visualization -->
+      <div class="waveform-wrap" id="waveform-wrap">
+        <!-- Rendered dynamically by script -->
+      </div>
+
+      <div id="score-output-wrap"></div>
+    </div>
+
+    <!-- Controls Row -->
+    <div style="display:grid;grid-template-columns:1fr;gap:20px" class="animate-in md:grid-cols-2">
+      <!-- Mic Capture Card -->
+      <div class="card text-center" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px">
+        <button class="mic-button" id="mic-btn" aria-label="Toggle recording">
+          <span class="material-symbols-outlined" style="font-size:3rem" id="mic-icon">mic</span>
+        </button>
+        <p class="t-label" style="margin-top:16px;text-transform:uppercase" id="mic-status">Tap to start recording</p>
+        <p class="t-label-sm text-muted" style="margin-top:4px">Make sure you are in a quiet room</p>
+      </div>
+
+      <!-- Benchmark Score ranges -->
+      <div class="card" style="padding:28px">
+        <h3 class="t-label text-muted" style="margin-bottom:16px">Pronunciation Benchmarks</h3>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div class="fav-item" id="score-excellent" style="padding:10px 16px;border-color:rgba(0,109,60,0.15)">
+            <span style="font-weight:700;color:var(--secondary)">Excellent Accent</span>
+            <span style="font-weight:700;color:var(--secondary)">90 - 100%</span>
+          </div>
+          <div class="fav-item" id="score-good" style="padding:10px 16px;border-color:rgba(0,93,167,0.15)">
+            <span style="font-weight:700;color:var(--primary)">Good Accent</span>
+            <span style="font-weight:700;color:var(--primary)">75 - 89%</span>
+          </div>
+          <div class="fav-item" id="score-fair" style="padding:10px 16px;border-color:rgba(132,80,0,0.15)">
+            <span style="font-weight:700;color:var(--tertiary)">Fair/Try Again</span>
+            <span style="font-weight:700;color:var(--tertiary)">0 - 74%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ═══════════════ BOTTOM NAV (Mobile) ════════════════ -->
+  <nav class="bottom-nav" aria-label="Mobile navigation">
+    <button onclick="location.href='study.html'" class="bottom-nav-btn">
+      <span class="material-symbols-outlined" aria-hidden="true">style</span>
+      Study
+    </button>
+    <button onclick="location.href='stats.html'" class="bottom-nav-btn">
+      <span class="material-symbols-outlined" aria-hidden="true">leaderboard</span>
+      Stats
+    </button>
+    <button onclick="location.href='categories.html'" class="bottom-nav-btn">
+      <span class="material-symbols-outlined" aria-hidden="true">category</span>
+      Categories
+    </button>
+    <button onclick="location.href='quiz.html'" class="bottom-nav-btn">
+      <span class="material-symbols-outlined" aria-hidden="true">quiz</span>
+      Quiz
+    </button>
+  </nav>
+
+  <script>
+    const PHONETICS = {
+      'adventure': '/ədˈventʃər/',
+      'ebullient': '/ɪˈbʊliənt/',
+      'persevere': '/ˌpɜːrsəˈvɪr/',
+      'melancholy': '/ˈmelənkɑːli/',
+      'eloquent': '/ˈeləkwənt/',
+      'flourish': '/ˈflɜːrɪʃ/',
+      'whimsical': '/ˈwɪmzɪkl/',
+      'resilient': '/rɪˈzɪliənt/',
+      'serenity': '/səˈrenəti/',
+      'diligent': '/ˈdɪlɪdʒənt/',
+      'ameliorate': '/əˈmiːliəreɪt/'
+    };
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const activeWord = urlParams.get('word') || 'Ameliorate';
+
+    // Set page text values
+    document.getElementById('speak-word').textContent = activeWord;
+    const phonetic = PHONETICS[activeWord.toLowerCase()] || '/.../';
+    document.getElementById('speak-phonetic').textContent = phonetic;
+
+    // Render waveform bars
+    const waveWrap = document.getElementById('waveform-wrap');
+    const barCount = 36;
+    const bars = [];
+    for (let i = 0; i < barCount; i++) {
+      const b = document.createElement('div');
+      b.className = 'waveform-bar';
+      b.style.height = '8px';
+      waveWrap.appendChild(b);
+      bars.push(b);
+    }
+
+    let isRecording = false;
+    let waveTimer = null;
+    const micBtn = document.getElementById('mic-btn');
+    const micIcon = document.getElementById('mic-icon');
+    const micStatus = document.getElementById('mic-status');
+    const scoreWrap = document.getElementById('score-output-wrap');
+
+    function speakDemoWord() {
+      if ('speechSynthesis' in window) {
+        const u = new SpeechSynthesisUtterance(activeWord);
+        u.lang = 'en-US';
+        speechSynthesis.speak(u);
+      }
+    }
+
+    function toggleRecording() {
+      isRecording = !isRecording;
+      if (isRecording) {
+        // Start recording style
+        micBtn.classList.add('recording');
+        micIcon.textContent = 'stop';
+        micStatus.textContent = 'Listening... Speak Now';
+        scoreWrap.innerHTML = '';
+
+        // Reset benchmarks highlights
+        document.querySelectorAll('.fav-item').forEach(el => el.style.background = '');
+
+        // Start waveform animation
+        waveTimer = setInterval(() => {
+          bars.forEach(bar => {
+            const h = Math.floor(Math.random() * 80) + 8;
+            bar.style.height = h + 'px';
+            bar.classList.add('active');
+          });
+        }, 80);
+      } else {
+        // Stop recording style
+        micBtn.classList.remove('recording');
+        micIcon.textContent = 'mic';
+        micStatus.textContent = 'Tap to start recording';
+
+        clearInterval(waveTimer);
+        bars.forEach(bar => {
+          bar.style.height = '8px';
+          bar.classList.remove('active');
+        });
+
+        // Compute simulated score
+        const score = Math.floor(Math.random() * 25) + 75; // 75 - 100%
+        let label = 'Fair';
+        let bg = 'rgba(132,80,0,0.1)';
+        let border = 'var(--tertiary)';
+        let targetId = 'score-fair';
+
+        if (score >= 90) {
+          label = 'Excellent';
+          bg = 'var(--secondary-light)';
+          border = 'var(--secondary)';
+          targetId = 'score-excellent';
+        } else if (score >= 75) {
+          label = 'Good';
+          bg = 'var(--primary-light)';
+          border = 'var(--primary)';
+          targetId = 'score-good';
+        }
+
+        // Output results
+        scoreWrap.innerHTML = `
+          <div class="score-badge animate-in" style="background:${bg};border:2px solid ${border};color:${border}">
+            Pronunciation Score: &nbsp;<strong>${score}% (${label})</strong>
+          </div>
+        `;
+
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) targetEl.style.background = bg;
+      }
+    }
+
+    micBtn.addEventListener('click', toggleRecording);
+  </script>
+</body>
+</html>

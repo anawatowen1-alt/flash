@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Flash Card Learning — Study flashcards, flip cards, earn XP and master English vocabulary.">
+  <title>Flash Card Learning — Study</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@400,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-study">
+
+  <!-- ═══════════════ SIDEBAR (Desktop) ════════════════ -->
+  <aside class="app-sidebar" aria-label="Navigation">
+    <div class="sidebar-header">
+      <div class="sidebar-title">Study</div>
+      <div class="sidebar-subtitle">Level: Intermediate</div>
+    </div>
+    <nav class="sidebar-nav" aria-label="Sidebar navigation">
+      <a href="study.html" class="sidebar-link active" aria-current="page">
+        <span class="material-symbols-outlined" aria-hidden="true">auto_stories</span>
+        All Words
+      </a>
+      <a href="study.html?mode=favorites" class="sidebar-link">
+        <span class="material-symbols-outlined" aria-hidden="true">grade</span>
+        Favorites
+      </a>
+      <a href="categories.html" class="sidebar-link">
+        <span class="material-symbols-outlined" aria-hidden="true">category</span>
+        Categories
+      </a>
+      <a href="quiz.html" class="sidebar-link">
+        <span class="material-symbols-outlined" aria-hidden="true">quiz</span>
+        Daily Quiz
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="sidebar-cta" onclick="location.href='quiz.html'">Start Daily Quiz</button>
+    </div>
+  </aside>
+
+  <!-- ═══════════════ HEADER ════════════════ -->
+  <header class="app-header">
+    <div class="header-brand">
+      <a href="index.html" class="icon-btn" aria-label="Go back to login">
+        <span class="material-symbols-outlined">arrow_back</span>
+      </a>
+      <div class="header-logo-icon" aria-hidden="true">
+        <span class="material-symbols-outlined">style</span>
+      </div>
+      <span class="header-app-name">Flash Card Learning</span>
+    </div>
+    <nav class="header-nav-links" aria-label="Top navigation">
+      <a href="study.html" class="nav-link active">Study</a>
+      <a href="study.html?mode=favorites" class="nav-link">Favorites</a>
+      <a href="categories.html" class="nav-link">Categories</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" aria-label="Logout" onclick="location.href='index.html'">
+        <span class="material-symbols-outlined">logout</span>
+      </button>
+      <div class="avatar-btn" aria-hidden="true">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhmyMvMapgCGLhEHUElfUfcxPN3xDLoIEKWs4dFFFom6QNrUOWZDymqMTv2HQ_Fo9VodtSM0FcUeeM-6317m6VwcT_0Bg0hHE0YIzH4Y5nuOdZBnX3FV46XZmbbZDjdUPWrUMKHzin7BBMPSuF8jhAbd9Bal8xTxClg7m2kzIfqeCLHMcvP9OOfpfxqa4cUs7wWj1n0DfmFjhWH0MvacPaRKHoJTK0GNWeaImOk7hxi-EDcVph4B8JpEdk7eOzwXkfHahctD2fQoHV" alt="User avatar">
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════ MAIN CONTENT ════════════════ -->
+  <div class="study-layout">
+
+    <!-- Filter Banner -->
+    <div id="filter-banner" class="filter-banner" style="display: none;"></div>
+
+    <!-- Stats Row -->
+    <div class="stats-row animate-in" role="region" aria-label="Today's statistics">
+      <div class="stat-card">
+        <div class="stat-icon stat-icon--green" aria-hidden="true">
+          <span class="material-symbols-outlined icon-fill">check_circle</span>
+        </div>
+        <div class="stat-info">
+          <div class="stat-label-text">Mastered Today</div>
+          <div class="stat-value-text secondary" id="stat-mastered">12</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon stat-icon--amber" aria-hidden="true">
+          <span class="material-symbols-outlined icon-fill">local_fire_department</span>
+        </div>
+        <div class="stat-info">
+          <div class="stat-label-text">Current Streak</div>
+          <div class="stat-value-text tertiary" id="stat-streak">5 Days</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon stat-icon--blue" aria-hidden="true">
+          <span class="material-symbols-outlined icon-fill">track_changes</span>
+        </div>
+        <div class="stat-info">
+          <div class="stat-label-text">Accuracy</div>
+          <div class="stat-value-text primary" id="stat-accuracy">85%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Session Progress -->
+    <div class="session-progress animate-in" role="region" aria-label="Session progress">
+      <div class="progress-labels">
+        <span class="t-label-sm text-muted">Session Progress</span>
+        <span class="t-label-sm text-primary" id="progress-label">15 / 20 Words</span>
+      </div>
+      <div class="progress-track" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" aria-label="Session progress 75%">
+        <div class="progress-fill progress-fill--primary progress-shine-anim" id="progress-fill" style="width:75%"></div>
+      </div>
+    </div>
+
+    <!-- ── Flashcard ── -->
+    <div class="flashcard-wrap animate-in" aria-label="Flashcard — click or press Space to flip">
+      <div class="flashcard" id="flashcard" tabindex="0" role="button" aria-pressed="false" aria-label="Flip flashcard">
+
+        <!-- Front Face -->
+        <div class="card-face card-front">
+          <span class="tag tag--noun" id="card-category">Noun</span>
+          <div class="card-word" id="card-word">Adventure</div>
+          <div class="card-hint" id="card-hint">Tap card or press Space to flip</div>
+          <div class="card-flip-icon" aria-hidden="true">
+            <span class="material-symbols-outlined" style="font-size:3rem;color:var(--primary-fixed-dim)">quiz</span>
+          </div>
+        </div>
+
+        <!-- Back Face -->
+        <div class="card-face card-back">
+          <span class="tag tag--noun" aria-hidden="true">Noun</span>
+          <div class="card-translation" id="card-translation">การผจญภัย</div>
+          <div class="card-example">
+            "Life is a great <strong id="card-word-em">adventure</strong>."
+          </div>
+          <div class="card-back-actions">
+            <button class="back-action-btn" aria-label="Listen to pronunciation" id="btn-speak">
+              <span class="material-symbols-outlined">volume_up</span>
+            </button>
+            <button class="back-action-btn" id="btn-favorite" aria-label="Add to favorites">
+              <span class="material-symbols-outlined">grade</span>
+            </button>
+            <button class="back-action-btn" aria-label="Practice pronunciation">
+              <span class="material-symbols-outlined">mic</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Card navigation -->
+    <div class="card-nav-row animate-in">
+      <button class="btn-ghost" id="btn-next" aria-label="Next word">
+        <span class="material-symbols-outlined" aria-hidden="true">navigate_next</span>
+        Next Word
+      </button>
+      <button class="back-action-btn" id="btn-fav-quick" aria-label="Favourite this word" style="width:44px;height:44px;border-radius:12px;border:2px solid var(--outline-variant)">
+        <span class="material-symbols-outlined">grade</span>
+      </button>
+    </div>
+
+    <!-- Rating Buttons -->
+    <div class="rating-grid animate-in" role="group" aria-label="Rate this card">
+      <button class="rating-btn rating-btn--again" onclick="rateCard('again', this)" aria-label="Again — review in 1 minute">
+        <span class="rating-label">Again</span>
+        <span class="rating-time">1 min</span>
+      </button>
+      <button class="rating-btn rating-btn--hard" onclick="rateCard('hard', this)" aria-label="Hard — review in 2 days">
+        <span class="rating-label">Hard</span>
+        <span class="rating-time">2 days</span>
+      </button>
+      <button class="rating-btn rating-btn--good" onclick="rateCard('good', this)" aria-label="Good — review in 4 days">
+        <span class="rating-label">Good</span>
+        <span class="rating-time">4 days</span>
+      </button>
+      <button class="rating-btn rating-btn--easy" onclick="rateCard('easy', this)" aria-label="Easy — review in 7 days">
+        <span class="rating-label">Easy</span>
+        <span class="rating-time">7 days</span>
+      </button>
+    </div>
+
+    <!-- Keyboard hint -->
+    <p class="keyboard-hint">
+      <span class="kbd">Space</span> Flip &nbsp;·&nbsp;
+      <span class="kbd">←</span> Hard &nbsp;·&nbsp;
+      <span class="kbd">→</span> Easy &nbsp;·&nbsp;
+      <span class="kbd">S</span> Speak
+    </p>
+
+  </div><!-- /study-layout -->
+
+  <!-- ═══════════════ BOTTOM NAV (Mobile) ════════════════ -->
+  <nav class="bottom-nav" aria-label="Mobile navigation">
+    <button onclick="location.href='study.html'" class="bottom-nav-btn active" aria-current="page">
+      <span class="material-symbols-outlined icon-fill" aria-hidden="true">style</span>
+      Study
+    </button>
+    <button onclick="location.href='#'" class="bottom-nav-btn">
+      <span class="material-symbols-outlined" aria-hidden="true">leaderboard</span>
+      Stats
+    </button>
+    <button onclick="location.href='categories.html'" class="bottom-nav-btn">
+      <span class="material-symbols-outlined" aria-hidden="true">category</span>
+      Categories
+    </button>
+    <button onclick="location.href='quiz.html'" class="bottom-nav-btn">
+      <span class="material-symbols-outlined" aria-hidden="true">quiz</span>
+      Quiz
+    </button>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>

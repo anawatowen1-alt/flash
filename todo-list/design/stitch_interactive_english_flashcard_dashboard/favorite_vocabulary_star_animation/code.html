@@ -1,0 +1,376 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Favorites - FLASH CARD LEARNING</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Inter:wght@400;500&amp;family=Space+Grotesk:wght@600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Plus+Jakarta+Sans:wght@100..900&amp;family=Space+Grotesk:wght@100..900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f1f4f6",
+                        "on-tertiary-fixed": "#2b1700",
+                        "on-background": "#181c1e",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#ebeef0",
+                        "secondary": "#006d3c",
+                        "tertiary-container": "#a36712",
+                        "on-tertiary-container": "#fffbff",
+                        "inverse-surface": "#2d3133",
+                        "on-surface-variant": "#414751",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb866",
+                        "on-secondary-container": "#00723f",
+                        "background": "#f7fafc",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#ffddba",
+                        "primary-fixed-dim": "#a4c9ff",
+                        "on-secondary-fixed": "#00210f",
+                        "secondary-container": "#85f6ad",
+                        "surface-tint": "#0060ac",
+                        "inverse-primary": "#a4c9ff",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#00522c",
+                        "primary-fixed": "#d4e3ff",
+                        "tertiary": "#845000",
+                        "surface-container-high": "#e5e9eb",
+                        "secondary-fixed-dim": "#6bdc96",
+                        "on-surface": "#181c1e",
+                        "on-primary-container": "#fdfcff",
+                        "surface-bright": "#f7fafc",
+                        "on-primary-fixed-variant": "#004883",
+                        "outline-variant": "#c1c7d3",
+                        "on-error-container": "#93000a",
+                        "primary": "#005da7",
+                        "on-primary-fixed": "#001c39",
+                        "surface-variant": "#e0e3e5",
+                        "on-tertiary-fixed-variant": "#673d00",
+                        "surface-dim": "#d7dadc",
+                        "surface": "#f7fafc",
+                        "secondary-fixed": "#88f9b0",
+                        "error-container": "#ffdad6",
+                        "outline": "#717783",
+                        "on-error": "#ffffff",
+                        "primary-container": "#2976c7",
+                        "inverse-on-surface": "#eef1f3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-margin": "24px",
+                        "base": "8px",
+                        "inner-padding": "20px",
+                        "card-gap": "16px",
+                        "section-padding": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "card-text": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Space Grotesk"],
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "card-text": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-md": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sticker-shadow {
+            box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.15);
+        }
+        .sticker-shadow-hover:hover {
+            box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 0.2);
+            transform: translate(-2px, -2px);
+        }
+        .active-sink:active {
+            box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.1);
+            transform: translate(2px, 2px);
+        }
+        .pixel-progress {
+            background-image: linear-gradient(90deg, rgba(255,255,255,0.2) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.2) 75%, transparent 75%, transparent);
+            background-size: 20px 20px;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f4f6;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #005da7;
+            border-radius: 4px;
+        }
+
+        @keyframes star-pop {
+          0% { transform: scale(1); }
+          50% { transform: scale(1.4); }
+          100% { transform: scale(1); }
+        }
+
+        .animate-star-pop {
+            animation: star-pop 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-container-margin py-4 max-w-full bg-surface shadow-sm border-b-2 border-outline-variant">
+<div class="flex items-center gap-3"><button aria-label="Go back" class="material-symbols-outlined p-2 rounded-full hover:bg-surface-container-high transition-colors active:scale-95 text-on-surface-variant mr-2">arrow_back</button>
+<span class="material-symbols-outlined text-primary" style="font-size: 32px;">bolt</span>
+<span class="text-label-md font-label-md font-black tracking-widest text-primary">FLASH CARD LEARNING</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined p-2 rounded-full hover:bg-surface-container-high transition-colors active:scale-95">logout</button>
+<div class="w-10 h-10 rounded-full border-2 border-primary overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A close-up high-quality portrait of a friendly student with a warm smile, wearing modern headphones, in a bright and airy study space with pixel-art posters in the background. The lighting is soft and natural, emphasizing a vibrant and welcoming educational atmosphere with clean lines and high-contrast primary colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVBPWwMj7BC9DZ-jtHPYyWosBT-hWKLc9LOIBnnN_YDU-kM7zr2arO3WLYNTpqtd5MGIS52khINuUxPbZ5K7dOIWKSCu8KL80fG1QxuV-7CtwOZ3RESeTUOQQH2BjqYRoYjljRzpZ7KdF7UTu4LtGY5dlUHzR4Kjc-K7whuW9ewjBjZX7HoYcPgI6zIoJRXpvhIqDZFqgJ4LDuSAY71fc8vQkZIsAf7xEMuOlGxDNEKAP5Mbweab27-SvaI9TRQAbnV_f4BhKMNCjc">
+</div>
+</div>
+</header>
+<!-- SideNavBar (Desktop) -->
+<nav class="hidden lg:flex flex-col fixed left-0 top-0 h-full z-40 bg-surface-container-low w-64 pt-24 pb-8 px-4 border-r-2 border-outline-variant">
+<div class="mb-8 p-4 bg-surface-container-highest rounded-xl sticker-shadow">
+<h2 class="text-headline-lg font-headline-lg text-primary mb-1 leading-tight">Study Progress</h2>
+<p class="text-label-md font-label-md text-on-surface-variant">Level: Intermediate</p>
+<div class="mt-4 w-full h-3 bg-surface-container-low rounded-full overflow-hidden">
+<div class="h-full bg-primary pixel-progress" style="width: 65%;"></div>
+</div>
+</div>
+<div class="flex flex-col gap-2 flex-grow">
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-highest transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">library_books</span>
+<span class="font-label-md text-label-md">All Words</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-highest transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">label</span>
+<span class="font-label-md text-label-md">Nouns</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-highest transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">directions_run</span>
+<span class="font-label-md text-label-md">Verbs</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-highest transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">format_paint</span>
+<span class="font-label-md text-label-md">Adjectives</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-primary font-bold border-r-4 border-primary bg-primary-container/20 transition-all rounded-lg group translate-x-1" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">grade</span>
+<span class="font-label-md text-label-md">Favorites</span>
+</a><a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-highest transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">mic</span>
+<span class="font-label-md text-label-md">Speak Test</span>
+</a>
+</div>
+<button class="mt-auto w-full py-4 bg-primary text-on-primary font-bold rounded-xl sticker-shadow active-sink transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">play_circle</span>
+            Start Daily Quiz
+        </button>
+</nav>
+<!-- Main Content Area -->
+<main class="lg:pl-64 pt-24 pb-24 lg:pb-8 min-h-screen">
+<div class="max-w-[1200px] mx-auto px-container-margin">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 mt-4">
+<div>
+<h1 class="text-headline-xl font-headline-xl text-on-surface">Your Favorites</h1>
+<p class="text-body-md text-on-surface-variant max-w-lg">Master the words you've flagged for extra focus. Practice makes perfect!</p>
+</div>
+<button class="bg-secondary text-on-secondary px-8 py-4 rounded-xl sticker-shadow active-sink transition-all flex items-center justify-center gap-3 font-bold group">
+<span class="material-symbols-outlined group-hover:rotate-12 transition-transform">bolt</span>
+                    Start Quiz with Favorites
+                </button>
+</div>
+<!-- Search and Filter Bar -->
+<div class="relative mb-10">
+<div class="flex items-center bg-surface-container-lowest border-2 border-outline-variant focus-within:border-primary rounded-xl px-4 py-1 transition-all sticker-shadow">
+<span class="material-symbols-outlined text-outline">search</span>
+<input class="w-full bg-transparent border-none focus:ring-0 px-4 py-3 font-card-text text-body-md placeholder:text-outline/50" placeholder="Find a favorite word..." type="text">
+<div class="hidden md:flex items-center gap-2 text-outline-variant">
+<kbd class="bg-surface-container-high px-2 py-1 rounded text-label-md font-mono">⌘</kbd>
+<kbd class="bg-surface-container-high px-2 py-1 rounded text-label-md font-mono">K</kbd>
+</div>
+</div>
+</div>
+<!-- Flash Card Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-card-gap pb-12">
+<!-- Card 1 -->
+<div class="bg-white p-inner-padding rounded-[24px] border-2 border-primary/20 sticker-shadow sticker-shadow-hover transition-all flex flex-col h-full min-h-[180px] relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4">
+<button class="favorite-btn text-primary transition-transform active:scale-90">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">grade</span>
+</button>
+</div>
+<div class="flex-grow">
+<span class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary font-label-md text-[12px] mb-3">NOUN</span>
+<h3 class="text-card-text font-card-text text-on-surface mb-2">Ephemeral</h3>
+<p class="text-on-surface-variant italic mb-4">Lasting for a very short time.</p>
+</div>
+<div class="flex items-center justify-between mt-auto pt-4 border-t border-outline-variant/30">
+<button class="text-primary font-bold text-label-md hover:underline flex items-center gap-1">
+                            Review Details <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button><button class="flex items-center gap-1 text-primary font-bold text-label-md hover:underline ml-4"><span class="material-symbols-outlined text-[18px]">mic</span> Speak Test</button>
+<span class="text-label-md text-outline">Mastery: 45%</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white p-inner-padding rounded-[24px] border-2 border-secondary/20 sticker-shadow sticker-shadow-hover transition-all flex flex-col h-full min-h-[180px] relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4">
+<button class="favorite-btn text-primary transition-transform active:scale-90">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">grade</span>
+</button>
+</div>
+<div class="flex-grow">
+<span class="inline-block px-3 py-1 rounded-full bg-secondary/10 text-secondary font-label-md text-[12px] mb-3">VERB</span>
+<h3 class="text-card-text font-card-text text-on-surface mb-2">Ameliorate</h3>
+<p class="text-on-surface-variant italic mb-4">Make (something bad or unsatisfactory) better.</p>
+</div>
+<div class="flex items-center justify-between mt-auto pt-4 border-t border-outline-variant/30">
+<button class="text-primary font-bold text-label-md hover:underline flex items-center gap-1">
+                            Review Details <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button><button class="flex items-center gap-1 text-primary font-bold text-label-md hover:underline ml-4"><span class="material-symbols-outlined text-[18px]">mic</span> Speak Test</button>
+<span class="text-label-md text-outline">Mastery: 82%</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white p-inner-padding rounded-[24px] border-2 border-tertiary/20 sticker-shadow sticker-shadow-hover transition-all flex flex-col h-full min-h-[180px] relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4">
+<button class="favorite-btn text-primary transition-transform active:scale-90">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">grade</span>
+</button>
+</div>
+<div class="flex-grow">
+<span class="inline-block px-3 py-1 rounded-full bg-tertiary/10 text-tertiary font-label-md text-[12px] mb-3">ADJECTIVE</span>
+<h3 class="text-card-text font-card-text text-on-surface mb-2">Quintessential</h3>
+<p class="text-on-surface-variant italic mb-4">Representing the most perfect or typical example.</p>
+</div>
+<div class="flex items-center justify-between mt-auto pt-4 border-t border-outline-variant/30">
+<button class="text-primary font-bold text-label-md hover:underline flex items-center gap-1">
+                            Review Details <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button><button class="flex items-center gap-1 text-primary font-bold text-label-md hover:underline ml-4"><span class="material-symbols-outlined text-[18px]">mic</span> Speak Test</button>
+<span class="text-label-md text-outline">Mastery: 12%</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-white p-inner-padding rounded-[24px] border-2 border-primary/20 sticker-shadow sticker-shadow-hover transition-all flex flex-col h-full min-h-[180px] relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4">
+<button class="favorite-btn text-primary transition-transform active:scale-90">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">grade</span>
+</button>
+</div>
+<div class="flex-grow">
+<span class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary font-label-md text-[12px] mb-3">NOUN</span>
+<h3 class="text-card-text font-card-text text-on-surface mb-2">Serendipity</h3>
+<p class="text-on-surface-variant italic mb-4">The occurrence and development of events by chance.</p>
+</div>
+<div class="flex items-center justify-between mt-auto pt-4 border-t border-outline-variant/30">
+<button class="text-primary font-bold text-label-md hover:underline flex items-center gap-1">
+                            Review Details <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button><button class="flex items-center gap-1 text-primary font-bold text-label-md hover:underline ml-4"><span class="material-symbols-outlined text-[18px]">mic</span> Speak Test</button>
+<span class="text-label-md text-outline">Mastery: 66%</span>
+</div>
+</div>
+<!-- Empty State Suggestion -->
+<div class="border-2 border-dashed border-outline-variant rounded-[24px] flex flex-col items-center justify-center p-8 text-center bg-surface-container-low/50 group cursor-pointer hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-outline-variant text-[48px] mb-4 group-hover:scale-110 transition-transform">add_circle</span>
+<p class="font-bold text-on-surface-variant mb-1">Add More Favorites</p>
+<p class="text-label-md text-outline">Browse all words to find more gems</p>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-surface shadow-[0_-4px_8px_rgba(0,0,0,0.15)] rounded-t-xl border-t border-outline-variant/30">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container transition-all p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined">style</span>
+<span class="text-label-md font-label-md">Study</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container transition-all p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="text-label-md font-label-md">Stats</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">category</span>
+<span class="text-label-md font-label-md">Categories</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container transition-all p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-label-md font-label-md">Profile</span>
+</a>
+</nav>
+<!-- Visual Atmosphere: Subtle background texture -->
+<div class="fixed inset-0 pointer-events-none z-[-1] opacity-30">
+<div class="absolute inset-0" style="background-image: radial-gradient(#005da7 0.5px, transparent 0.5px); background-size: 24px 24px;"></div>
+</div>
+<script>
+        // Simple Interaction: Mock Search Filtering
+        const searchInput = document.querySelector('input[type="text"]');
+        const cards = document.querySelectorAll('.grid > div:not(:last-child)');
+
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            cards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const desc = card.querySelector('p').textContent.toLowerCase();
+                if (title.includes(term) || desc.includes(term)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Toggle Favorite Heart Animation with Pop
+        document.querySelectorAll('.favorite-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const icon = this.querySelector('.material-symbols-outlined');
+                const isFilled = icon.style.fontVariationSettings.includes("'FILL' 1");
+                
+                // Toggle state
+                if (isFilled) {
+                    icon.style.fontVariationSettings = "'FILL' 0";
+                    this.classList.remove('text-primary');
+                    this.classList.add('text-outline');
+                } else {
+                    icon.style.fontVariationSettings = "'FILL' 1";
+                    this.classList.add('text-primary');
+                    this.classList.remove('text-outline');
+                }
+
+                // Apply Pop Animation
+                this.classList.add('animate-star-pop');
+                
+                // Remove class after animation ends (300ms)
+                setTimeout(() => {
+                    this.classList.remove('animate-star-pop');
+                }, 300);
+            });
+        });
+    </script>
+
+
+
+
+
+
+</body></html>

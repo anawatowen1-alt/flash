@@ -1,0 +1,401 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Categories - FLASH CARD LEARNING</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Inter:wght@400;500&amp;family=Space+Grotesk:wght@600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Plus+Jakarta+Sans:wght@100..900&amp;family=Space+Grotesk:wght@100..900&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-tint": "#0060ac",
+                    "tertiary-fixed": "#ffddba",
+                    "surface-container": "#ebeef0",
+                    "secondary-fixed-dim": "#6bdc96",
+                    "surface-variant": "#e0e3e5",
+                    "inverse-surface": "#2d3133",
+                    "on-tertiary-container": "#fffbff",
+                    "surface-dim": "#d7dadc",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed-dim": "#a4c9ff",
+                    "on-error-container": "#93000a",
+                    "inverse-on-surface": "#eef1f3",
+                    "on-surface": "#181c1e",
+                    "outline": "#717783",
+                    "primary-fixed": "#d4e3ff",
+                    "on-background": "#181c1e",
+                    "on-primary-fixed": "#001c39",
+                    "tertiary-fixed-dim": "#ffb866",
+                    "secondary": "#006d3c",
+                    "surface": "#f7fafc",
+                    "on-secondary-fixed": "#00210f",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed": "#88f9b0",
+                    "secondary-container": "#85f6ad",
+                    "background": "#f7fafc",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed-variant": "#00522c",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#845000",
+                    "primary-container": "#2976c7",
+                    "surface-container-highest": "#e0e3e5",
+                    "surface-container-high": "#e5e9eb",
+                    "on-surface-variant": "#414751",
+                    "primary": "#005da7",
+                    "on-primary-fixed-variant": "#004883",
+                    "outline-variant": "#c1c7d3",
+                    "on-tertiary-fixed": "#2b1700",
+                    "tertiary-container": "#a36712",
+                    "on-secondary-container": "#00723f",
+                    "on-primary-container": "#fdfcff",
+                    "inverse-primary": "#a4c9ff",
+                    "on-primary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed-variant": "#673d00",
+                    "surface-container-low": "#f1f4f6",
+                    "surface-bright": "#f7fafc",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "inner-padding": "20px",
+                    "container-margin": "24px",
+                    "base": "8px",
+                    "section-padding": "32px",
+                    "card-gap": "16px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Inter"],
+                    "label-md": ["Space Grotesk"],
+                    "headline-xl": ["Plus Jakarta Sans"],
+                    "headline-lg-mobile": ["Plus Jakarta Sans"],
+                    "card-text": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "body-md": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                    "card-text": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        
+        .sticker-shadow {
+            box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+        
+        .sticker-shadow:hover {
+            box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 0.15);
+            transform: translate(-2px, -2px);
+        }
+
+        .sticker-shadow:active {
+            box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.1);
+            transform: translate(2px, 2px);
+        }
+
+        .progress-shine {
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+            animation: shine 2s infinite linear;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .pixel-border {
+            border-image-slice: 2;
+            border-image-width: 2px;
+            border-style: solid;
+        }
+
+        /* Hide scrollbar for cleaner look */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-container-margin py-4 max-w-full bg-surface border-b-2 border-outline-variant shadow-sm"><button class="p-2 -ml-2 rounded-full hover:bg-surface-container-high transition-colors active:scale-95 flex items-center justify-center" aria-label="Go back">
+  <span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<div class="flex items-center gap-4 ml-2">
+<span class="text-label-md font-label-md font-black tracking-widest text-primary">FLASH CARD LEARNING</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-surface-container-high transition-colors active:scale-95">
+<span class="material-symbols-outlined text-primary">logout</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden border-2 border-primary">
+<img class="w-full h-full object-cover" data-alt="A vibrant pixel-art avatar of a friendly student wearing a blue cap and glasses, against a soft yellow background. The style is clean and retro-gaming inspired, with sharp pixel edges and a joyful expression, perfect for a gamified learning application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhmyMvMapgCGLhEHUElfUfcxPN3xDLoIEKWs4dFFFom6QNrUOWZDymqMTv2HQ_Fo9VodtSM0FcUeeM-6317m6VwcT_0Bg0hHE0YIzH4Y5nuOdZBnX3FV46XZmbbZDjdUPWrUMKHzin7BBMPSuF8jhAbd9Bal8xTxClg7m2kzIfqeCLHMcvP9OOfpfxqa4cUs7wWj1n0DfmFjhWH0MvacPaRKHoJTK0GNWeaImOk7hxi-EDcVph4B8JpEdk7eOzwXkfHahctD2fQoHV">
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col fixed left-0 top-0 h-full z-40 bg-surface-container-low shadow-sm h-screen w-64 rounded-r-xl pt-24 pb-8 px-4">
+<div class="mb-8 px-4">
+<h2 class="text-headline-lg font-headline-lg text-primary">Study Progress</h2>
+<p class="text-label-md font-label-md text-on-surface-variant">Level: Intermediate</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined">library_books</span>
+<span class="font-label-md">All Words</span>
+</a>
+
+
+<a class="flex items-center gap-3 px-4 py-3 text-primary font-bold border-r-4 border-primary bg-primary-container/20 rounded-l-lg translate-x-1" href="#">
+<span class="material-symbols-outlined">category</span>
+<span class="font-label-md">Categories</span>
+</a>
+
+</nav>
+<div class="mt-auto px-2">
+<button class="w-full py-4 bg-primary text-on-primary font-bold rounded-xl shadow-lg active:scale-95 transition-transform">
+                Start Daily Quiz
+            </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:ml-64 pt-24 pb-24 lg:pb-8 px-container-margin min-h-screen">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-section-padding">
+<div>
+<h1 class="text-headline-xl font-headline-xl text-on-surface mb-2">Word Categories</h1>
+<p class="text-body-md text-on-surface-variant max-w-2xl">Organize your vocabulary with curated sets and personal categories. Track your mastery across different topics.</p>
+</div>
+<button class="flex items-center justify-center gap-2 px-6 py-3 bg-primary text-on-primary font-bold rounded-xl sticker-shadow group">
+<span class="material-symbols-outlined group-hover:rotate-90 transition-transform">add</span>
+<span class="font-label-md">Create New Category</span>
+</button>
+</div>
+<!-- Filter & Search Bar -->
+<div class="flex flex-col sm:flex-row gap-4 mb-8">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-white border-2 border-outline-variant rounded-xl focus:border-primary focus:ring-0 outline-none transition-colors font-body-md" placeholder="Search categories..." type="text">
+</div>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 px-4 py-3 bg-surface-container-low border-2 border-outline-variant rounded-xl hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+<span class="font-label-md">Filter</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-3 bg-surface-container-low border-2 border-outline-variant rounded-xl hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">sort</span>
+<span class="font-label-md">Sort</span>
+</button>
+</div>
+</div>
+<!-- Categories Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-card-gap">
+<!-- Category Card: Nouns -->
+<div class="bg-white p-inner-padding rounded-[24px] border-2 border-primary/10 sticker-shadow flex flex-col h-full group cursor-pointer">
+<div class="flex justify-between items-start mb-6">
+<div class="w-14 h-14 rounded-2xl bg-primary-fixed flex items-center justify-center text-primary border-2 border-primary/20">
+<span class="material-symbols-outlined text-[32px]">label</span>
+</div>
+<div class="px-3 py-1 bg-primary/10 text-primary rounded-full">
+<span class="text-label-md">Essential</span>
+</div>
+</div>
+<h3 class="text-card-text font-card-text mb-2">Nouns</h3><button class="flex items-center gap-1 text-primary hover:bg-primary/10 px-2 py-1 rounded-lg transition-colors mb-2" aria-label="Speak Test for Nouns"><span class="material-symbols-outlined text-sm">mic</span><span class="text-label-md">Speak Test</span></button>
+<p class="text-on-surface-variant text-sm mb-6 flex-1">Everyday objects, places, and people. The foundation of your English vocabulary.</p>
+<div class="space-y-3">
+<div class="flex justify-between text-label-md">
+<span class="text-on-surface-variant">420 Words</span>
+<span class="text-primary font-bold">85% Mastered</span>
+</div>
+<div class="h-3 w-full bg-surface-container rounded-full overflow-hidden relative">
+<div class="h-full bg-primary rounded-full relative overflow-hidden" style="width: 85%">
+<div class="absolute inset-0 progress-shine"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Category Card: Verbs -->
+<div class="bg-white p-inner-padding rounded-[24px] border-2 border-secondary/10 sticker-shadow flex flex-col h-full group cursor-pointer">
+<div class="flex justify-between items-start mb-6">
+<div class="w-14 h-14 rounded-2xl bg-secondary-fixed flex items-center justify-center text-secondary border-2 border-secondary/20">
+<span class="material-symbols-outlined text-[32px]">directions_run</span>
+</div>
+<div class="px-3 py-1 bg-secondary/10 text-secondary rounded-full">
+<span class="text-label-md">Core</span>
+</div>
+</div>
+<h3 class="text-card-text font-card-text mb-2">Verbs</h3><button class="flex items-center gap-1 text-secondary hover:bg-secondary/10 px-2 py-1 rounded-lg transition-colors mb-2" aria-label="Speak Test for Verbs"><span class="material-symbols-outlined text-sm">mic</span><span class="text-label-md">Speak Test</span></button>
+<p class="text-on-surface-variant text-sm mb-6 flex-1">Action words and states of being. Essential for building complete and dynamic sentences.</p>
+<div class="space-y-3">
+<div class="flex justify-between text-label-md">
+<span class="text-on-surface-variant">315 Words</span>
+<span class="text-secondary font-bold">62% Mastered</span>
+</div>
+<div class="h-3 w-full bg-surface-container rounded-full overflow-hidden relative">
+<div class="h-full bg-secondary rounded-full relative overflow-hidden" style="width: 62%">
+<div class="absolute inset-0 progress-shine"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Category Card: Adjectives -->
+<div class="bg-white p-inner-padding rounded-[24px] border-2 border-tertiary-container/10 sticker-shadow flex flex-col h-full group cursor-pointer">
+<div class="flex justify-between items-start mb-6">
+<div class="w-14 h-14 rounded-2xl bg-tertiary-fixed flex items-center justify-center text-tertiary border-2 border-tertiary-container/20">
+<span class="material-symbols-outlined text-[32px]">format_paint</span>
+</div>
+<div class="px-3 py-1 bg-tertiary/10 text-tertiary rounded-full">
+<span class="text-label-md">Creative</span>
+</div>
+</div>
+<h3 class="text-card-text font-card-text mb-2">Adjectives</h3><button class="flex items-center gap-1 text-tertiary hover:bg-tertiary/10 px-2 py-1 rounded-lg transition-colors mb-2" aria-label="Speak Test for Adjectives"><span class="material-symbols-outlined text-sm">mic</span><span class="text-label-md">Speak Test</span></button>
+<p class="text-on-surface-variant text-sm mb-6 flex-1">Descriptive words to add color and precision to your conversations and writing.</p>
+<div class="space-y-3">
+<div class="flex justify-between text-label-md">
+<span class="text-on-surface-variant">280 Words</span>
+<span class="text-tertiary font-bold">45% Mastered</span>
+</div>
+<div class="h-3 w-full bg-surface-container rounded-full overflow-hidden relative">
+<div class="h-full bg-tertiary rounded-full relative overflow-hidden" style="width: 45%">
+<div class="absolute inset-0 progress-shine"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Category Card: Travel -->
+<div class="bg-white p-inner-padding rounded-[24px] border-2 border-primary/10 sticker-shadow flex flex-col h-full group cursor-pointer">
+<div class="flex justify-between items-start mb-6">
+<div class="w-14 h-14 rounded-2xl bg-primary-fixed flex items-center justify-center text-primary border-2 border-primary/20">
+<span class="material-symbols-outlined text-[32px]">flight_takeoff</span>
+</div>
+<div class="px-3 py-1 bg-primary/10 text-primary rounded-full">
+<span class="text-label-md">Situational</span>
+</div>
+</div>
+<h3 class="text-card-text font-card-text mb-2">Travel</h3><button class="flex items-center gap-1 text-primary hover:bg-primary/10 px-2 py-1 rounded-lg transition-colors mb-2" aria-label="Speak Test for Travel"><span class="material-symbols-outlined text-sm">mic</span><span class="text-label-md">Speak Test</span></button>
+<p class="text-on-surface-variant text-sm mb-6 flex-1">Airports, hotels, directions, and ordering food. Pack these words for your next trip!</p>
+<div class="space-y-3">
+<div class="flex justify-between text-label-md">
+<span class="text-on-surface-variant">150 Words</span>
+<span class="text-primary font-bold">20% Mastered</span>
+</div>
+<div class="h-3 w-full bg-surface-container rounded-full overflow-hidden relative">
+<div class="h-full bg-primary rounded-full relative overflow-hidden" style="width: 20%">
+<div class="absolute inset-0 progress-shine"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Category Card: Business -->
+<div class="bg-white p-inner-padding rounded-[24px] border-2 border-secondary/10 sticker-shadow flex flex-col h-full group cursor-pointer">
+<div class="flex justify-between items-start mb-6">
+<div class="w-14 h-14 rounded-2xl bg-secondary-fixed flex items-center justify-center text-secondary border-2 border-secondary/20">
+<span class="material-symbols-outlined text-[32px]">work</span>
+</div>
+<div class="px-3 py-1 bg-secondary/10 text-secondary rounded-full">
+<span class="text-label-md">Professional</span>
+</div>
+</div>
+<h3 class="text-card-text font-card-text mb-2">Business</h3><button class="flex items-center gap-1 text-secondary hover:bg-secondary/10 px-2 py-1 rounded-lg transition-colors mb-2" aria-label="Speak Test for Business"><span class="material-symbols-outlined text-sm">mic</span><span class="text-label-md">Speak Test</span></button>
+<p class="text-on-surface-variant text-sm mb-6 flex-1">Vocabulary for meetings, presentations, and professional networking environments.</p>
+<div class="space-y-3">
+<div class="flex justify-between text-label-md">
+<span class="text-on-surface-variant">210 Words</span>
+<span class="text-secondary font-bold">12% Mastered</span>
+</div>
+<div class="h-3 w-full bg-surface-container rounded-full overflow-hidden relative">
+<div class="h-full bg-secondary rounded-full relative overflow-hidden" style="width: 12%">
+<div class="absolute inset-0 progress-shine"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Category Card: Academic -->
+<div class="bg-white p-inner-padding rounded-[24px] border-2 border-tertiary-container/10 sticker-shadow flex flex-col h-full group cursor-pointer">
+<div class="flex justify-between items-start mb-6">
+<div class="w-14 h-14 rounded-2xl bg-tertiary-fixed flex items-center justify-center text-tertiary border-2 border-tertiary-container/20">
+<span class="material-symbols-outlined text-[32px]">school</span>
+</div>
+<div class="px-3 py-1 bg-tertiary/10 text-tertiary rounded-full">
+<span class="text-label-md">Formal</span>
+</div>
+</div>
+<h3 class="text-card-text font-card-text mb-2">Academic</h3><button class="flex items-center gap-1 text-tertiary hover:bg-tertiary/10 px-2 py-1 rounded-lg transition-colors mb-2" aria-label="Speak Test for Academic"><span class="material-symbols-outlined text-sm">mic</span><span class="text-label-md">Speak Test</span></button>
+<p class="text-on-surface-variant text-sm mb-6 flex-1">Complex terminology and formal structures used in research and university settings.</p>
+<div class="space-y-3">
+<div class="flex justify-between text-label-md">
+<span class="text-on-surface-variant">190 Words</span>
+<span class="text-tertiary font-bold">0% Mastered</span>
+</div>
+<div class="h-3 w-full bg-surface-container rounded-full overflow-hidden relative">
+<div class="h-full bg-tertiary rounded-full relative overflow-hidden" style="width: 0%">
+<div class="absolute inset-0 progress-shine"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-surface shadow-[0_-4px_8px_rgba(0,0,0,0.15)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">style</span>
+<span class="text-label-md-mobile font-label-md-mobile">Study</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="text-label-md-mobile font-label-md-mobile">Stats</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">category</span>
+<span class="text-label-md-mobile font-label-md-mobile">Categories</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-label-md-mobile font-label-md-mobile">Profile</span>
+</a>
+</nav>
+<!-- Micro-interaction Script -->
+<script>
+        document.querySelectorAll('.sticker-shadow').forEach(card => {
+            card.addEventListener('mousedown', () => {
+                card.style.transform = 'translate(2px, 2px)';
+            });
+            card.addEventListener('mouseup', () => {
+                card.style.transform = 'translate(-2px, -2px)';
+            });
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+</body></html>
